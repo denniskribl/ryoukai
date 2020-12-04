@@ -1,0 +1,8 @@
+type Vocabulary @model {
+  id: ID!
+  jp: String!
+  de: String!
+  romaji: String
+  furigana: String
+  en: String
+}

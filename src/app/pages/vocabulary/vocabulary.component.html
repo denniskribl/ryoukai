@@ -1,0 +1,45 @@
+<h1>Vokabeln</h1>
+<div class="wrapper">
+  <div class="container">
+    <div class="clr-row">
+      <div class="clr-col">
+        <p>Klicke auf die Karte um die Lösung anzuzeigen</p>
+        <div class="flippable-card-container">
+          <app-flipable-card *ngIf="(currentVocabulary$ | async) as vocab; else loadingTempl">
+            <ng-container appCardFront>
+              <ng-container *ngIf="!loading; else loadingTempl">
+                <div class="emphasize vocab">
+                    {{ vocab?.jp }}<hr>
+                </div>
+                <div class="vocab">
+                  {{ vocab?.furigana }}<br>
+                  {{ vocab?.romaji }}
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container appCardBack>
+              <div class="vocab" *ngIf="!loading; else loadingTempl">
+                {{ vocab?.de | titlecase }}
+              </div>
+            </ng-container>
+          </app-flipable-card>
+        </div>
+      </div>
+    </div>
+    <div class="clr-row progress-buttons" *ngIf="(currentVocabulary$ | async)">
+      <button type="button" class="btn btn-primary" (click)="this.back()">
+        Zurück
+      </button>
+      <button type="button" class="btn btn-primary" (click)="this.next()">
+        Weiter
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTempl>
+  <div class="loading">
+    <clr-spinner></clr-spinner>
+  </div>
+</ng-template>
+

@@ -1,0 +1,17 @@
+<ngx-flip [flip]="flip">
+  <div back class="card">
+    <div class="card-block" (click)="flip = !flip">
+      <div class="card-text">
+        <ng-content select="[appCardBack]"></ng-content>
+      </div>
+    </div>
+  </div>
+  <div front class="card">
+    <div class="card-block" (click)="flip = !flip">
+      <div class="card-text">
+        <ng-content select="[appCardFront]"></ng-content>
+      </div>
+    </div>
+  </div>
+</ngx-flip>
+

@@ -1,0 +1,12 @@
+<clr-header class="header-4">
+  <div class="branding">
+    <span class="title">ryoukai!</span>
+  </div>
+  <div class="header-nav" [clr-nav-level]="1">
+    <a routerLink="./" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['active']" class="nav-link nav-text">HOME</a>
+    <a routerLink="vokabeln" [routerLinkActive]="['active']" class="nav-link nav-text">VOKABELN</a>
+    <a routerLink="kanji" [routerLinkActive]="['active']" class="nav-link nav-text">KANJI</a>
+    <a routerLink="hiragana" [routerLinkActive]="['active']" class="nav-link nav-text">HIRAGANA</a>
+    <a routerLink="katakana" [routerLinkActive]="['active']" class="nav-link nav-text">KATAKANA</a>
+  </div>
+</clr-header>

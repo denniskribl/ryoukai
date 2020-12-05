@@ -16,6 +16,7 @@ import { FlippableCardComponent } from './pages/vocabulary/components/flippable-
 import { CardFrontIdentifierDirective } from './pages/vocabulary/directives/card-front-identifier.directive';
 import { CardBackIdentifierDirective } from './pages/vocabulary/directives/card-back-identifier.directive';
 import { UnderConstructionComponent } from './shared/components/under-construction/under-construction.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { UnderConstructionComponent } from './shared/components/under-constructi
     AppRoutingModule,
     ClarityModule,
     BrowserAnimationsModule,
-    FlipModule
+    FlipModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

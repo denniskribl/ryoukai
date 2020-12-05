@@ -1,38 +1,67 @@
 <h1>Vokabeln</h1>
-<div class="wrapper">
+<div class="wrapper" *ngIf="(currentVocabulary$ | async) as vocab; else loadingTempl">
   <div class="container">
     <div class="clr-row">
       <div class="clr-col">
         <p>Klicke auf die Karte um die Lösung anzuzeigen</p>
         <div class="flippable-card-container">
-          <app-flipable-card *ngIf="(currentVocabulary$ | async) as vocab; else loadingTempl">
+          <app-flipable-card>
             <ng-container appCardFront>
-              <ng-container *ngIf="!loading; else loadingTempl">
-                <div class="emphasize vocab">
-                    {{ vocab?.jp }}<hr>
-                </div>
-                <div class="vocab">
-                  {{ vocab?.furigana }}<br>
-                  {{ vocab?.romaji }}
-                </div>
-              </ng-container>
+              <ng-container *ngIf="jpToGer; then jp else de;"></ng-container>
             </ng-container>
             <ng-container appCardBack>
-              <div class="vocab" *ngIf="!loading; else loadingTempl">
+              <ng-container *ngIf="jpToGer; then de else jp"></ng-container>
+            </ng-container>
+            <ng-template #jp>
+              <div class="emphasize vocab">
+                {{ vocab?.jp }}<hr *ngIf="showRomaji || showSimplified">
+              </div>
+              <div class="vocab">
+                <ng-container *ngIf="showSimplified">
+                  {{ vocab?.furigana }}<br>
+                </ng-container>
+                <ng-container *ngIf="showRomaji">
+                  {{ vocab?.romaji }}<br>
+                </ng-container>
+              </div>
+            </ng-template>
+            <ng-template #de>
+              <div class="vocab">
                 {{ vocab?.de | titlecase }}
               </div>
-            </ng-container>
+            </ng-template>
           </app-flipable-card>
         </div>
       </div>
     </div>
-    <div class="clr-row progress-buttons" *ngIf="(currentVocabulary$ | async)">
+    <div class="clr-row progress-buttons">
       <button type="button" class="btn btn-primary" (click)="this.back()">
         Zurück
       </button>
       <button type="button" class="btn btn-primary" (click)="this.next()">
         Weiter
       </button>
+    </div>
+    <div class="settings">
+      <a (click)="showSettings = !showSettings"><clr-icon shape="cog"></clr-icon> Einstellungen</a>
+      <ng-container *ngIf="showSettings">
+        <clr-checkbox-container >
+          <clr-checkbox-wrapper>
+            <input type="checkbox" clrCheckbox [(ngModel)]="showRomaji" name="romaji" />
+            <label>Romaji anzeigen</label>
+          </clr-checkbox-wrapper>
+          <clr-checkbox-wrapper>
+            <input type="checkbox" clrCheckbox [(ngModel)]="showSimplified" name="options" />
+            <label>Vereinfachte Schreibweise anzeigen</label>
+          </clr-checkbox-wrapper>
+        </clr-checkbox-container>
+        <clr-toggle-container>
+          <clr-toggle-wrapper>
+            <input type="checkbox" clrToggle [(ngModel)]="jpToGer"/>
+            <label>Japanisch zu Deutsch</label>
+          </clr-toggle-wrapper>
+        </clr-toggle-container>
+      </ng-container>
     </div>
   </div>
 </div>
@@ -42,4 +71,3 @@
     <clr-spinner></clr-spinner>
   </div>
 </ng-template>
-

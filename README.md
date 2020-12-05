@@ -23,3 +23,7 @@ The App is entirely hosted in AWS and uses the powerful Amplify Framork
 ## Development Guide
 
 execute ```yarn && yarn start``` to start the application locally
+
+## License
+
+This project is licensed under GPL-3.0

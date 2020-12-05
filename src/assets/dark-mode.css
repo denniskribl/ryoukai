@@ -1,0 +1,7 @@
+html, img {
+  filter: invert(94%) hue-rotate(180deg) !important;
+}
+
+html {
+  transition: color 300ms, background-color 300ms;
+}

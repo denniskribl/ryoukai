@@ -9,4 +9,15 @@
     <a routerLink="hiragana" [routerLinkActive]="['active']" class="nav-link nav-text">HIRAGANA</a>
     <a routerLink="katakana" [routerLinkActive]="['active']" class="nav-link nav-text">KATAKANA</a>
   </div>
+  <div class="header-actions">
+    <a class="nav-link nav-icon" *ngIf="!darkMode" (click)="darkMode = true">
+      <clr-icon shape="moon" class="is-solid"></clr-icon>
+    </a>
+    <a class="nav-link nav-icon" *ngIf="darkMode" (click)="darkMode = false">
+      <clr-icon shape="sun"></clr-icon>
+    </a>
+  </div>
+
 </clr-header>
+
+<link *ngIf=darkMode rel="stylesheet" [href]='cssUrl'>

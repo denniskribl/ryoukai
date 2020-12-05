@@ -29,7 +29,7 @@ import { UnderConstructionComponent } from './shared/components/under-constructi
     FlippableCardComponent,
     CardFrontIdentifierDirective,
     CardBackIdentifierDirective,
-    UnderConstructionComponent
+    UnderConstructionComponent,
   ],
   imports: [
     BrowserModule,

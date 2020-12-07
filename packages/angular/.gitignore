@@ -60,9 +60,3 @@ amplifyconfiguration.json
 amplify-build-config.json
 amplify-gradle-config.json
 amplifytools.xcconfig
-
-
-# custom
-
-# exclude for now
-packages/feeder

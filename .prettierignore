@@ -1,0 +1,12 @@
+.idea
+.vscode
+dist
+node_modules
+
+*.html
+*.md
+*.json
+*.svg
+.pnp.js
+yarn.lock
+.yarn

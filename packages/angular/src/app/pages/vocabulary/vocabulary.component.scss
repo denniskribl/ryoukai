@@ -48,6 +48,7 @@ h1 {
   flex-direction: column;
 }
 
-clr-icon {
-  padding-bottom: 3px;
+input {
+  -webkit-tap-highlight-color: transparent;
+  outline-style: none;
 }

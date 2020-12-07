@@ -45,7 +45,7 @@ export class VocabularyComponent implements OnInit {
       this.card.flip = false;
       setTimeout(() => {
         this.counter$.next(this.counter$.value + 1);
-      }, 900);
+      }, 320);
     } else {
       this.counter$.next(this.counter$.value + 1);
     }
@@ -63,9 +63,5 @@ export class VocabularyComponent implements OnInit {
     } else {
       this.counter$.next(this.counter$.value - 1);
     }
-  }
-
-  changeMode(e: any): void {
-    console.log(e);
   }
 }

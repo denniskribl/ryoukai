@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { VocabularyService } from '../../shared/services/vocabulary.service';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Vocabulary } from '../../shared/models/vocabulary';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { FlippableCardComponent } from './components/flippable-card/flippable-card.component';
 import { shuffle } from './utils/shuffle';
 
@@ -11,12 +11,12 @@ import { shuffle } from './utils/shuffle';
   templateUrl: './vocabulary.component.html',
   styleUrls: ['./vocabulary.component.scss'],
 })
-export class VocabularyComponent implements OnInit {
+export class VocabularyComponent implements OnInit, OnDestroy {
   constructor(private vocabularyService: VocabularyService) {}
 
   counter$ = new BehaviorSubject(0);
+  destroyed$ = new Subject();
   vocabularies$: Observable<Vocabulary[]> = this.vocabularyService.listVocabularies();
-  loading = false;
   showSettings = false;
   showSimplified = true;
   showRomaji = true;
@@ -25,9 +25,8 @@ export class VocabularyComponent implements OnInit {
   private max: number;
 
   currentVocabulary$ = combineLatest([this.counter$, this.vocabularies$]).pipe(
-    tap(() => (this.loading = true)),
     switchMap(([index, vocabularies]) => of(vocabularies[index])),
-    tap(() => (this.loading = false))
+    takeUntil(this.destroyed$)
   );
 
   @ViewChild(FlippableCardComponent)
@@ -35,6 +34,10 @@ export class VocabularyComponent implements OnInit {
 
   ngOnInit(): void {
     this.vocabularies$.subscribe((v) => (this.max = v.length));
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
   }
 
   next(): void {
